@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,7 +13,6 @@ import com.example.notificationsapp.databinding.ActivityNotificationDetailsBindi
 
 public class NotificationDetailsActivity extends AppCompatActivity {
 
-    TextView textViewNotificationDetails;
 
     ActivityNotificationDetailsBinding binding;
 
@@ -23,11 +23,30 @@ public class NotificationDetailsActivity extends AppCompatActivity {
         binding = ActivityNotificationDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        Bundle extras = getIntent().getExtras();
+        Log.i("TAG", String.valueOf(extras));
+        if (extras.containsKey("count")) {
+            String title = extras.getString("count");
+            Log.i("TAG", title);
+            binding.textViewNotificationDetails.setText(title);
+        }
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
-        textViewNotificationDetails.setText(intent.getStringExtra("count"));
+        super.onNewIntent(intent);
+        //binding.textViewNotificationDetails.setText(intent.getStringExtra("count"));
+/*
+        Bundle extras = getIntent().getExtras();
+        Log.i("TAG", String.valueOf(extras));
+        if (extras.containsKey("count")) {
+            String title = extras.getString("count");
+            Log.i("TAG", title);
+        }
+
+ */
+
     }
 
 }
