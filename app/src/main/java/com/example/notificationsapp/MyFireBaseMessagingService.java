@@ -22,6 +22,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        myAppsNotificationManager = MyAppsNotificationManager.getInstance(this);
         super.onMessageReceived(remoteMessage);
         Log.i(getString(R.string.DEBUG_TAG), "Message received!!");
 
@@ -33,6 +34,6 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
                 NotificationCompat.PRIORITY_HIGH,
                 true,
                 getResources().getInteger(R.integer.notificationId),
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_MUTABLE);
     }
 }
